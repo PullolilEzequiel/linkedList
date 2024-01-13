@@ -24,3 +24,14 @@ pub struct LinkedList<T: Clone> {
     end: Option<*mut LinkedList<T>>,
     size: u32,
 }
+
+impl<T: Clone> LinkedList<T> {
+    pub fn new() -> Self {
+        LinkedList {
+            head: None,
+            middle: None,
+            end: None,
+            size: 0,
+        }
+    }
+}

@@ -1,2 +1,2 @@
-mod linkedList;
-pub use linkedList::LinkedList;
+mod linked_list;
+pub use linked_list::LinkedList;
