@@ -5,7 +5,7 @@ mod test {
     #[test]
     fn is_empty_test() {
         let mut list = LinkedList::<u32>::new();
-        assert!(list.is_empty() == 1);
+        assert!(list.is_empty());
     }
     #[test]
     fn insert_test() {

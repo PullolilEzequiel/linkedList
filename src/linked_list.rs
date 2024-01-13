@@ -34,4 +34,10 @@ impl<T: Clone> LinkedList<T> {
             size: 0,
         }
     }
+    pub fn len(&self) -> u32 {
+        self.size
+    }
+    pub fn is_empty(&self) -> bool {
+        self.head.is_none()
+    }
 }
