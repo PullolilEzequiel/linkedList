@@ -8,7 +8,7 @@
   - El LinkedNode de 'end' no puede tener como 'next' al nodo de 'head'
   - El LinkedNode de 'middle' no puede esta enlazado a head'
 */
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 struct LinkedNode<T: Clone> {
     element: T,
     next: Option<Box<LinkedNode<T>>>,
@@ -35,7 +35,7 @@ impl<T: Clone> LinkedList<T> {
     pub fn is_empty(&self) -> bool {
         self.head.is_none()
     }
-
+    /// Replace the first element
     pub fn push(&mut self, elem: T) {
         if self.head.is_none() {
             let new_node = Some(Box::new(LinkedNode {
@@ -51,6 +51,7 @@ impl<T: Clone> LinkedList<T> {
                 next: self.head.clone(),
             }));
 
+            // calculate the middle element
             if self.size % 2 == 0 {
                 if let Some(n) = &self.middle {
                     self.middle = n.next.clone();
@@ -58,5 +59,23 @@ impl<T: Clone> LinkedList<T> {
             }
         }
         self.size += 1;
+    }
+
+    /// Return the element at index 'index'
+    /// Precond: Set size is >= index
+    pub fn get_at(&self, index: u32) -> Result<T, String> {
+        let mut i = index;
+        let mut node = &self.head;
+        while i > 0 {
+            if let Some(n) = node {
+                node = &n.next;
+            }
+            i -= 1;
+        }
+
+        match node {
+            Some(n) => Ok(n.element.clone()),
+            None => Err(format!("Nonexistent element in index {}", index)),
+        }
     }
 }
