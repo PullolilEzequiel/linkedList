@@ -65,7 +65,15 @@ impl<T: Clone> LinkedList<T> {
     /// Precond: Set size is >= index
     pub fn get_at(&self, index: u32) -> Result<T, String> {
         let mut i = index;
-        let mut node = &self.head;
+        let mut node: &Option<Box<LinkedNode<T>>> = &self.head;
+        let half_size = self.size / 2;
+        if index == self.size {
+            node = &self.middle;
+            i = 0;
+        } else if index > half_size && half_size % 2 == 0 {
+            i -= half_size;
+            node = &self.middle;
+        }
         while i > 0 {
             if let Some(n) = node {
                 node = &n.next;
